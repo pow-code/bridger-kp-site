@@ -25,7 +25,15 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
+/* Lenis (плавный скролл) — официальный сброс. БЕЗ scroll-behavior:smooth:
+   нативный smooth конфликтует с Lenis (еле ползёт, потом скачок). */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
 body{
   background:var(--bg);
   color:var(--text);

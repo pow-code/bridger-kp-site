@@ -53,17 +53,8 @@
   var hasST = typeof window.ScrollTrigger !== 'undefined';
   if (hasST) gsap.registerPlugin(window.ScrollTrigger);
 
-  /* ---- Lenis: премиум плавный скролл (через GSAP-тикер, без двойного rAF) ---- */
-  if (typeof window.Lenis !== 'undefined') {
-    var lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
-    if (hasST) {
-      lenis.on('scroll', window.ScrollTrigger.update);
-      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      requestAnimationFrame(function raf(t) { lenis.raf(t); requestAnimationFrame(raf); });
-    }
-  }
+  /* Плавный скролл (Lenis) убран намеренно: на части устройств давал «вязкий»
+     скролл с рывком. Нативный скролл — ScrollTrigger работает с ним из коробки. */
 
   /* без ScrollTrigger — просто прогнать count-up, reveal оставить видимым */
   if (!hasST) {
